@@ -2,8 +2,10 @@ var uWaterloo = new google.maps.LatLng(43.4689, -80.5400);
 var siberia = new google.maps.LatLng(60, 105);
 var MeetUp_APIKEY = "46d3d10574c5c51716b1f3b747d425a";
 var map;
-var markers = [];
-var events = [];
+var markers = new Array();
+var events = new Array();
+var listeners = new Array();
+var infoWindows = new Array();
 var geolocate_on = new Boolean();
 
 function initialize() {
@@ -61,19 +63,19 @@ function initialize() {
 	};
 
 	// Try Geolocation
-	// if(navigator.geolocation) {
-	// 	geolocate_on = true;
-	// 	navigator.geolocation.getCurrentPosition(function(position) {
-	// 		initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-	// 		map.setCenter(initialLocation);
-	// 	}, function() {
-	// 		handleNoGeolocation(geolocate_on);
-	// 	});
-	// } else {
-	// 	geolocate_on = false;
-	// 	// Browser doesn't support Geolocation
-	// 	handleNoGeolocation(geolocate_on);
-	// }
+	if(navigator.geolocation) {
+		geolocate_on = true;
+		navigator.geolocation.getCurrentPosition(function(position) {
+			initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+			map.setCenter(initialLocation);
+		}, function() {
+			handleNoGeolocation(geolocate_on);
+		});
+	} else {
+		geolocate_on = false;
+		// Browser doesn't support Geolocation
+		handleNoGeolocation(geolocate_on);
+	}
 
 	// Places the Map in the desired 'div'
 	map = new google.maps.Map(document.getElementById('map-canvas'),
@@ -109,10 +111,6 @@ function initialize() {
 		test(loc.geometry.location.lng(), loc.geometry.location.lat());
 		map.setCenter(loc.geometry.location);
 	});
-
-	setTimeout(function() {
-		console.log(markers);
-	}, 1500);
 }
 
 function placeMarker(place) {
@@ -136,7 +134,9 @@ function handleNoGeolocation(flag){
 }
 
 function test(lon, lat){
-	var query = "https://api.meetup.com/2/open_events?callback=?&lat="+lat+"&lon="+lon+"&page=30&radius=10&order=distance&key="+MeetUp_APIKEY;
+	var query = "https://api.meetup.com/2/open_events?callback=?&lat="+lat+"&lon="+lon+"&page=10&radius=10&order=distance&key="+MeetUp_APIKEY;
+	var ind = 0;
+	events = new Array();
 
 	$.getJSON(query, function (data) {
 		$.each(data.results, function (i, item) {
@@ -150,6 +150,30 @@ function test(lon, lat){
 					title: item.name
 				});
 				markers.push(marker);
+
+				var new_event = new Object();
+				new_event.name = item.name;
+				new_event.location = item.venue.name + "," 
+									+ item.venue.address_1 + "," 
+									+ item.venue.city + "," 
+									+ item.venue.state + "," 
+									+ item.venue.country;
+				new_event.startTime = new Date();
+				new_event.startTime.setTime(item.time);
+				new_event.url = item.event_url;
+				new_event.desc = item.description;
+				events.push(new_event);
+
+				var li_id = "<li id = '" + (ind+1) + "'>";
+				var a_id = "<a id = 'eve" + (ind+1) + "'>";
+   
+				$("#event-details #" + ind).after(li_id+a_id+events[ind].name+"</a></li>");
+				
+				var modify = document.getElementById("eve" + (ind+1) + "");
+				modify.href = events[ind].url;
+
+				addInfoWindow(events[ind], marker);
+				ind++;
 				map.setZoom(15);
 			}
 		});
@@ -158,60 +182,55 @@ function test(lon, lat){
 
 // Sets the map on all markers in the array.
 function setAllMap(map) {
-  for (var i = 0; i < markers.length; i++) {
-    markers[i].setMap(map);
-  }
+	for (var i = 0; i < markers.length; i++) {
+		markers[i].setMap(map);
+	}
 }
 
 // Removes the markers from the map, but keeps them in the array.
 function clearMarkers() {
-  setAllMap(null);
+	setAllMap(null);
 }
 
 // Shows any markers currently in the array.
 function showMarkers() {
-  setAllMap(map);
+	setAllMap(map);
 }
 
 // Deletes all markers in the array by removing references to them.
 function deleteMarkers() {
-  clearMarkers();
-  markers = [];
+	clearMarkers();
+	markers = [];
 }
 
-// NEW STUFF
+function deleteInfoWindows(){
+	for(var i = 0; i < infoWindows.length; i++){
+		infoWindows[i].close();
+	}
+	infoWindows = new Array();
+}
 
-function loadEvents() {
-    var events = new Array;
-    events[0] = new Object;
-    events[0].name = "Fred";
-    events[0].location = "here";
-    events[0].startTime = "9";
-    events[0].endTime = "10";
-    events[0].description = "derf was here kill me knoweoiaf;wejfa;wigj;aer j iogaerjgoi";
-    events[1] = new Object;
-    events[1].name = "Fred";
-    events[1].location = "here";
-    events[1].startTime = "9";
-    events[1].endTime = "10";
-    events[1].description = "derf was here kill me knoweoiaf;wejfa;wigj;aer j iogaerjgoi";
-    events[2] = new Object;
-    events[2].name = "Fred";
-    events[2].location = "here";
-    events[2].startTime = "9";
-    events[2].endTime = "10";
-    events[2].description = "derf was here kill me knoweoiaf;wejfa;wigj;aer j iogaerjgoi";
-    
-    for( var i = 0; i < events.length; i++){
-        $(".sidebar-nav #" + i).after("<li id='" + (i+1) + "'> <a href='#'>" + events[i].name + " <span class='glyphicon arrow'></span></a>"
-            + "<ul><li><a href='#'>" + events[i].location + "</a></li><li><a href='#'>" + events[i].startTime
-            + "</a></li><li><a href='#'>" + events[i].endTime + "</a></li><li id='p" + i + "'><a href='#'>"
-            + events[i].description + "</a></li></ul></li>");
-        $("#events-hidden .dropdown-menu #t" + i).after("<li id='t" + (i+1) + "'> <a href='#'>" + events[i].name + " </a>"
-            + "<ul><li><a href='#'>" + events[i].location + "</a></li><li><a href='#'>" + events[i].startTime
-            + "</a></li><li><a href='#'>" + events[i].endTime + "</a></li><li><a href='#'>"
-            + events[i].description + "</a></li></ul></li>");
-    }
+function deleteListeners(){
+	for(var i = 0; i < listeners.length; i++){
+		google.maps.event.removeListener(listeners[i]);
+	}
+	listeners = new Array();
+}
+
+function addInfoWindow(event, marker){
+	var contents = "<a href = \"" + event.url + "\">" + event.name + "</a>" + 
+					"/nStart Time: " + event.startTime.toString() +
+					"/nLocation: " + event.location + 
+					"/nDescription: " + event.desc;
+	var infowindow = new google.maps.InfoWindow({
+		content: contents
+	});
+	infoWindows.push(infowindow);
+
+	var listener = new google.maps.event.addListener(marker, 'click', function() {
+		infowindow.open(marker.get('map'), marker);
+	});
+	listeners.push(listener);
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
