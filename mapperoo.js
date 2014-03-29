@@ -220,9 +220,9 @@ function deleteListeners(){
 
 function addInfoWindow(event, marker){
 	var contents = "<a href = \"" + event.url + "\">" + event.name + "</a>" + 
-					"/nStart Time: " + event.startTime.toString() +
-					"/nLocation: " + event.location + 
-					"/nDescription: " + event.desc;
+					"Start Time: " + event.startTime.toString() +
+					"Location: " + event.location + 
+					"Description: " + event.desc;
 	var infowindow = new google.maps.InfoWindow({
 		content: contents
 	});
