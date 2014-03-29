@@ -85,13 +85,13 @@ function initialize() {
 	var geoMarker = new GeolocationMarker();
     geoMarker.setCircleOptions({fillColor: '#808080'});
 
-    /*google.maps.event.addListenerOnce(geoMarker, 'position_changed', function() {
+    google.maps.event.addListenerOnce(geoMarker, 'position_changed', function() {
     	map.setCenter(this.getPosition());
     });
 
 	google.maps.event.addListener(geoMarker, 'geolocation_error', function(e) {
 	  alert('There was an error obtaining your position. Message: ' + e.message);
-	});*/
+	});
 
 	geoMarker.setMap(map);
 
