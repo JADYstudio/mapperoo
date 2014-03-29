@@ -82,7 +82,7 @@ function initialize() {
 	map = new google.maps.Map(document.getElementById('map-canvas'),
 		mapOptions);
 		
-	/*var geoMarker = new GeolocationMarker();
+	var geoMarker = new GeolocationMarker();
     geoMarker.setCircleOptions({fillColor: '#808080'});
 
     google.maps.event.addListenerOnce(geoMarker, 'position_changed', function() {
@@ -93,7 +93,7 @@ function initialize() {
 	  alert('There was an error obtaining your position. Message: ' + e.message);
 	});
 
-	geoMarker.setMap(map);*/
+	geoMarker.setMap(map);
 
 
 	
@@ -102,9 +102,9 @@ function initialize() {
 	map.setMapTypeId("map_style");
 
 	// New Event
-	/*google.maps.event.addListener(map, 'click', function(e) {
+	google.maps.event.addListener(map, 'click', function(e) {
 		placeMarker(e.latLng, map);
-		});*/
+		});
 
 	// Create the search box and link it to the UI element.
 	var input = /** @type {HTMLInputElement} */(
