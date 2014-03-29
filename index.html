@@ -24,7 +24,6 @@
                 else $("#events-hidden").removeClass("hidden");
             if ($(window).width() > 767) $("#events-hidden2").addClass("hidden");
                 else $("#events-hidden2").removeClass("hidden");
-            //loadEvents();
         });
     </script>
   
@@ -54,7 +53,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search <b class="caret"></b></a>
               <ul class="dropdown-menu dropdown-menu-form">
-                <form role="form">
+                <form role="form" onSubmit="getThePlace()">
                    <div class="form-group" id="no-bot-pls">
                       <label for="name">Location</label>
                       <input id="search-bar" class="controls" type="text" placeholder="Search Bar">
@@ -63,7 +62,7 @@
                 </form>
               </ul>
             </li>
-            
+            <li class = "dropdown"><a href="https://github.com/JADYstudio/mapperoo">About</a></li>
             <!-- Events Dropdown (appears if screen not wide enough) -->
             
             <li class="dropdown hidden" id="events-hidden">
@@ -91,17 +90,13 @@
             <!-- /Events Dropdown -->
             
           </ul>
-        </div><!--/.nav-collapse -->
-        
-        
-        
+        </div>
+
       </div>
     </div>
 
     <!-- Sidebar List -->
     <div id="wrapper">
-        
-        
         
         <!-- Sidebar -->
         <div id="sidebar-wrapper">

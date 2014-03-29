@@ -1,6 +1,6 @@
 var uWaterloo = new google.maps.LatLng(43.4689, -80.5400);
-var siberia = new google.maps.LatLng(60, 105);
-var MeetUp_APIKEY = "46d3d10574c5c51716b1f3b747d425a";
+var siberia = new google.maps.LatLng(43.467871, -80.5400);
+var MeetUp_APIKEY = "26157830757d475e4b557d7e5d725b35";
 var map;
 var loc;
 var ind = 0;
@@ -67,19 +67,16 @@ function initialize() {
 	};
 
 	// Try Geolocation
-	// if(navigator.geolocation) {
-	// 	geolocate_on = true;
-	// 	navigator.geolocation.getCurrentPosition(function(position) {
-	// 		initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-	// 		map.setCenter(initialLocation);
-	// 	}, function() {
-	// 		handleNoGeolocation(geolocate_on);
-	// 	});
-	// } else {
-	// 	geolocate_on = false;
-	// 	// Browser doesn't support Geolocation
-	// 	handleNoGeolocation(geolocate_on);
-	// }
+		if(navigator.geolocation) {
+		geolocate_on = true;
+		navigator.geolocation.getCurrentPosition(function(position) {
+		initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+		test(position.coords.longitude, position.coords.latitude);
+		map.setCenter(initialLocation);		
+		}, function() {
+		handleNoGeolocation(geolocate_on);
+		});
+		}
 
 	// Places the Map in the desired 'div'
 	map = new google.maps.Map(document.getElementById('map-canvas'),
@@ -102,7 +99,7 @@ function initialize() {
 	var searchBox = new google.maps.places.SearchBox(
 		/** @type {HTMLInputElement} */(input));
 
-	google.maps.event.addListener(searchBox, 'places_changed', function() {
+	google.maps.event.addListener(searchBox, 'places_changed', function getThePlace() {
 		var places = searchBox.getPlaces();
 
 		var loc = places[0];
