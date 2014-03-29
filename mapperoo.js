@@ -99,6 +99,11 @@ function initialize() {
 		/** @type {HTMLInputElement} */(input));
 
 	google.maps.event.addListener(searchBox, 'places_changed', function() {
+		 getToPlace ();
+		
+			});
+}
+		function getToPlace (){
 		var places = searchBox.getPlaces();
 
 		var loc = places[0];
@@ -112,8 +117,8 @@ function initialize() {
 		deleteMarkers();
 		test(loc.geometry.location.lng(), loc.geometry.location.lat());
 		map.setCenter(loc.geometry.location);
-	});
-}
+		}
+
 
 function placeMarker(place) {
   var marker = new google.maps.Marker({
