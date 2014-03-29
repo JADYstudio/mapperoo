@@ -3,6 +3,7 @@ var siberia = new google.maps.LatLng(60, 105);
 var MeetUp_APIKEY = "46d3d10574c5c51716b1f3b747d425a";
 var map;
 var markers = [];
+var events = [];
 var geolocate_on = new Boolean();
 
 function initialize() {
@@ -38,7 +39,7 @@ function initialize() {
 
 	// Affects the Map Options
 	var mapOptions = {
-		zoom: 15,
+		zoom: 16,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		center: uWaterloo,
 
@@ -149,7 +150,7 @@ function test(lon, lat){
 					title: item.name
 				});
 				markers.push(marker);
-				map.setZoom(14);
+				map.setZoom(15);
 			}
 		});
 	});
@@ -178,5 +179,39 @@ function deleteMarkers() {
   markers = [];
 }
 
+// NEW STUFF
+
+function loadEvents() {
+    var events = new Array;
+    events[0] = new Object;
+    events[0].name = "Fred";
+    events[0].location = "here";
+    events[0].startTime = "9";
+    events[0].endTime = "10";
+    events[0].description = "derf was here kill me knoweoiaf;wejfa;wigj;aer j iogaerjgoi";
+    events[1] = new Object;
+    events[1].name = "Fred";
+    events[1].location = "here";
+    events[1].startTime = "9";
+    events[1].endTime = "10";
+    events[1].description = "derf was here kill me knoweoiaf;wejfa;wigj;aer j iogaerjgoi";
+    events[2] = new Object;
+    events[2].name = "Fred";
+    events[2].location = "here";
+    events[2].startTime = "9";
+    events[2].endTime = "10";
+    events[2].description = "derf was here kill me knoweoiaf;wejfa;wigj;aer j iogaerjgoi";
+    
+    for( var i = 0; i < events.length; i++){
+        $(".sidebar-nav #" + i).after("<li id='" + (i+1) + "'> <a href='#'>" + events[i].name + " <span class='glyphicon arrow'></span></a>"
+            + "<ul><li><a href='#'>" + events[i].location + "</a></li><li><a href='#'>" + events[i].startTime
+            + "</a></li><li><a href='#'>" + events[i].endTime + "</a></li><li id='p" + i + "'><a href='#'>"
+            + events[i].description + "</a></li></ul></li>");
+        $("#events-hidden .dropdown-menu #t" + i).after("<li id='t" + (i+1) + "'> <a href='#'>" + events[i].name + " </a>"
+            + "<ul><li><a href='#'>" + events[i].location + "</a></li><li><a href='#'>" + events[i].startTime
+            + "</a></li><li><a href='#'>" + events[i].endTime + "</a></li><li><a href='#'>"
+            + events[i].description + "</a></li></ul></li>");
+    }
+}
 
 google.maps.event.addDomListener(window, 'load', initialize);
