@@ -1949,3 +1949,36 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   })
 
 }(jQuery);
+
+// custom methods
+    //Doesn't work, should open/close sidebar
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("active");
+    });
+    
+    //Allows dropdown to stay open while checking options
+    $(document).on('click', '.dropdown-menu.dropdown-menu-form', function(e) {
+        e.stopPropagation();
+    });
+    $(document).on('click', '#events-hidden .dropdown-menu > li', function(e) {
+        e.stopPropagation();
+    });
+    
+    //Accordion collapse
+    $(function () {
+        $('#menu').metisMenu({
+            toggle: true // disable the auto collapse. Default: true.
+        });
+    });
+    
+    //Width change
+    $(window).resize( function(e) {
+        if ($(window).width() > 767) $("#events-hidden").addClass("hidden");
+        else $("#events-hidden").removeClass("hidden");
+    });
+    
+    $(window).resize( function(e) {
+        if ($(window).width() > 767) $("#events-hidden2").addClass("hidden");
+        else $("#events-hidden2").removeClass("hidden");
+    });
