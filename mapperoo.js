@@ -63,19 +63,19 @@ function initialize() {
 	};
 
 	// Try Geolocation
-	// if(navigator.geolocation) {
-	// 	geolocate_on = true;
-	// 	navigator.geolocation.getCurrentPosition(function(position) {
-	// 		initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-	// 		map.setCenter(initialLocation);
-	// 	}, function() {
-	// 		handleNoGeolocation(geolocate_on);
-	// 	});
-	// } else {
-	// 	geolocate_on = false;
-	// 	// Browser doesn't support Geolocation
-	// 	handleNoGeolocation(geolocate_on);
-	// }
+	if(navigator.geolocation) {
+	geolocate_on = true;
+	navigator.geolocation.getCurrentPosition(function(position) {
+		initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+		map.setCenter(initialLocation);
+	}, function() {
+		handleNoGeolocation(geolocate_on);
+	});
+	} else {
+	geolocate_on = false;
+	// Browser doesn't support Geolocation
+	handleNoGeolocation(geolocate_on);
+	}
 
 	// Places the Map in the desired 'div'
 	map = new google.maps.Map(document.getElementById('map-canvas'),
