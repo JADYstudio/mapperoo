@@ -92,34 +92,22 @@ function initialize() {
 
 	GeoMarker.setMap(map);
 
-	
 	// Adds the new Style of Map to the list of available Styles
 	map.mapTypes.set("map_style", styledMap);
 	map.setMapTypeId("map_style");
-
-	// New Event
-	/*google.maps.event.addListener(map, 'click', function(e) {
-		placeMarker(e.latLng, map);
-		});*/
 
 	// Create the search box and link it to the UI element.
 	var input = /** @type {HTMLInputElement} */(
 		document.getElementById('search-bar'));
 	//map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-	var searchBox = new google.maps.places.SearchBox(
-		/** @type {HTMLInputElement} */(input));
+	var searchBox = new google.maps.places.SearchBox((input));
 
 	google.maps.event.addListener(searchBox, 'places_changed', function getToPlace() {			
 
 		var places = searchBox.getPlaces();
 
 		var loc = places[0];
-		//map.setCenter(loc.geometry.location);
-		//placeMarker(loc);
-		//console.log(loc);
-		//console.log(loc.geometry.location.lng());
-		//console.log(loc.geometry.location.lat());
 		$(".to-del").empty();
 		$(".to-del").append("<li class='hidden' id = '0'></li>");
 		deleteMarkers();
@@ -127,7 +115,6 @@ function initialize() {
 		map.setCenter(loc.geometry.location);
 		});
 }
-
 
 function placeMarker(place) {
   var marker = new google.maps.Marker({
@@ -156,7 +143,6 @@ function test(lon, lat){
 
 	$.getJSON(query, function (data) {
 		$.each(data.results, function (i, item) {
-			//console.log(item);
 
 			if(item["venue"]){
 				var pos = new google.maps.LatLng(item.venue.lat, item.venue.lon);
