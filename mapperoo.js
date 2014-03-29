@@ -133,10 +133,10 @@ function placeMarker(place) {
 function handleNoGeolocation(flag){
 	if(flag == true){
 		alert("Geolocation service failed.");
-		map.setCenter(siberia);
+		map.setCenter(uWaterloo);
 	} else {
 		alert("Geolocation not available");
-		map.setCenter(siberia);
+		map.setCenter(uWaterloo);
 	}
 }
 
