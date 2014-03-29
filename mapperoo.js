@@ -114,7 +114,7 @@ function initialize() {
 	var searchBox = new google.maps.places.SearchBox(
 		/** @type {HTMLInputElement} */(input));
 
-	google.maps.event.addListener(searchBox, 'places_changed', function() 	{
+		google.maps.event.addListener(searchBox, "places_changed", function() 	{
 		var places = searchBox.getPlaces();
 
 		var loc = places[0];
@@ -158,7 +158,7 @@ function test(lon, lat){
 		$.each(data.results, function (i, item) {
 			//console.log(item);
 
-			if(item["venue"]){
+			if(item.hasOwnProperty("venue")){
 				var pos = new google.maps.LatLng(item.venue.lat, item.venue.lon);
 				var marker = new google.maps.Marker({
 					position: pos,
