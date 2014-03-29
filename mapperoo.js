@@ -64,10 +64,10 @@ function initialize() {
 
 	// Try Geolocation
 	if(navigator.geolocation) {
-		console.log("Gets geoed");
 		geolocate_on = true;
 		navigator.geolocation.getCurrentPosition(function(position) {
 		initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+		test(position.coords.longitude, position.coords.latitude);
 		map.setCenter(initialLocation);		
 		}, function() {
 		handleNoGeolocation(geolocate_on);
