@@ -127,10 +127,11 @@ function loadScript() {
 }
 
 function loadEvents() {
-    var events = new Array;
-	
+    var events = new Array();
+	// change the lat long to be variable
 	test(43.4689, -80.5400, function(arr){
 		events = arr;
+		console.log(arr);
 		
 		for(var i = 0; i < events.length; i++){
 			var li_id = "<li id = '" + (i+1) + "'>";
@@ -145,7 +146,7 @@ function loadEvents() {
 
 function test(lat, lon, back_fn){
  
-var query = "https://api.meetup.com/2/open_events?callback=?&lat="+lat+"&lon="+lon+"&order=distance&page=7&radius=10&key="+APIKEY;
+var query = "https://api.meetup.com/2/open_events?callback=?&lat="+lat+"&lon="+lon+"&order=distance&page=20&radius=10&key="+APIKEY;
 
 var results = [];
 

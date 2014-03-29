@@ -11,6 +11,23 @@
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdH1tc30kU7krasCvtA9tlqt2TFfd2khA&sensor=true">
 	</script>
 	<script type="text/javascript" src="mapperoo.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    
+    <script>
+		$(document).ready(function() {
+            var test_arr = new Array();
+			
+			test_arr[0] = new Object();
+			test_arr[1] = new Object();
+			test_arr[2] = new Object();
+			
+			var new_var = new Object();
+			
+			test_arr.push(new_var);
+			
+			console.log(test_arr.length);
+        });
+	</script>
 	</head>
 	<body>
 		<div id="map-canvas"/>
