@@ -82,18 +82,18 @@ function initialize() {
 	map = new google.maps.Map(document.getElementById('map-canvas'),
 		mapOptions);
 		
-	var geoMarker = new GeolocationMarker();
+	/*var geoMarker = new GeolocationMarker();
     geoMarker.setCircleOptions({fillColor: '#808080'});
 
     google.maps.event.addListenerOnce(geoMarker, 'position_changed', function() {
     	map.setCenter(this.getPosition());
     });
 
-	/*google.maps.event.addListener(geoMarker, 'geolocation_error', function(e) {
+	google.maps.event.addListener(geoMarker, 'geolocation_error', function(e) {
 	  alert('There was an error obtaining your position. Message: ' + e.message);
-	});*/
+	});
 
-	geoMarker.setMap(map);
+	geoMarker.setMap(map);*/
 
 
 	
