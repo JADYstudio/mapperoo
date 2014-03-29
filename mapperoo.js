@@ -67,6 +67,7 @@ function initialize() {
 		geolocate_on = true;
 		navigator.geolocation.getCurrentPosition(function(position) {
 		initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+		
 		map.setCenter(initialLocation);
 		}, function() {
 		handleNoGeolocation(geolocate_on);
@@ -109,10 +110,7 @@ function initialize() {
 	var searchBox = new google.maps.places.SearchBox(
 		/** @type {HTMLInputElement} */(input));
 
-	google.maps.event.addListener(searchBox, 'places_changed', function getToPlace() {
-		
-		
-			
+	google.maps.event.addListener(searchBox, 'places_changed', function getToPlace() {			
 
 		var places = searchBox.getPlaces();
 
