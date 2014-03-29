@@ -92,33 +92,27 @@ function initialize() {
 
 	// Create the search box and link it to the UI element.
 	var input = /** @type {HTMLInputElement} */(
-		document.getElementById('Rsearch-bar'));
+		document.getElementById('search-bar'));
 	//map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
 	var searchBox = new google.maps.places.SearchBox(
 		/** @type {HTMLInputElement} */(input));
 
 	google.maps.event.addListener(searchBox, 'places_changed', function() {
-		goToPlaces ();
-	});
-		
-	}
-		
-		function goToPlaces (){
 		var places = searchBox.getPlaces();
-		
-		console.log(places);
-		
+
 		var loc = places[0];
 		//map.setCenter(loc.geometry.location);
 		//placeMarker(loc);
 		//console.log(loc);
 		//console.log(loc.geometry.location.lng());
 		//console.log(loc.geometry.location.lat());
+		$(".to-del").empty();
+		$(".to-del").append("<li class='hidden' id = '0'></li>");
 		deleteMarkers();
 		test(loc.geometry.location.lng(), loc.geometry.location.lat());
 		map.setCenter(loc.geometry.location);
-	
+	});
 }
 
 function placeMarker(place) {
@@ -227,10 +221,10 @@ function deleteListeners(){
 }
 
 function addInfoWindow(event, marker){
-	var contents = "<a href = \"" + event.url + "\">" + event.name + "</a>  \n" + 
-					"Start Time: " + event.startTime.toString() +
-					"Location: " + event.location + 
-					"Description: " + event.desc;
+	var contents = "<p><a href = \"" + event.url + "\">" + event.name + "</a>" + 
+					"<br/><br/>Start Time: " + event.startTime.toString() +
+					"<br/><br/>Location: " + event.location + 
+					"<br/><br/>Description: " + event.desc + "</p>";
 	var infowindow = new google.maps.InfoWindow({
 		content: contents
 	});
@@ -243,14 +237,3 @@ function addInfoWindow(event, marker){
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-
-$("#Rsearch-bar").keyup(function(event){
-
-  if (event.which === 13) {
-    goToPlaces ();
-   }  
-});
-
-$( "#searchButton" ).click(function() {
-goToPlaces ();
-});
