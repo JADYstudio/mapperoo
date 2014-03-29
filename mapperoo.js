@@ -87,6 +87,7 @@ function initialize() {
 
     google.maps.event.addListenerOnce(geoMarker, 'position_changed', function() {
     	map.setCenter(this.getPosition());
+    	map.fitBounds(this.getBounds());
     });
 
 	google.maps.event.addListener(geoMarker, 'geolocation_error', function(e) {
