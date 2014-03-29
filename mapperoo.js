@@ -89,9 +89,9 @@ function initialize() {
     	map.setCenter(this.getPosition());
     });
 
-	google.maps.event.addListener(geoMarker, 'geolocation_error', function(e) {
+	/*google.maps.event.addListener(geoMarker, 'geolocation_error', function(e) {
 	  alert('There was an error obtaining your position. Message: ' + e.message);
-	});
+	});*/
 
 	geoMarker.setMap(map);
 
