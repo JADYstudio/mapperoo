@@ -69,6 +69,8 @@ function initialize() {
 		initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 		map.setCenter(initialLocation);
 		
+		console.log("Gets geoed");
+		
 		}, function() {
 		handleNoGeolocation(geolocate_on);
 		});
