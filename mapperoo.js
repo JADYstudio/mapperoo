@@ -1,4 +1,5 @@
 var uWaterloo = new google.maps.LatLng(43.4689, -80.5400);
+const APIKEY = "26157830757d475e4b557d7e5d725b35";
 var map;
 var geolocate_on = false;
 
@@ -127,36 +128,37 @@ function loadScript() {
 
 function loadEvents() {
     var events = new Array;
-    events[0] = new Object;
-    events[0].name = "Fred";
-    events[0].location = "here";
-    events[0].startTime = "9";
-    events[0].endTime = "10";
-    events[0].description = "derf was here kill me knoweoiaf;wejfa;wigj;aer j iogaerjgoi";
-    events[1] = new Object;
-    events[1].name = "Fred";
-    events[1].location = "here";
-    events[1].startTime = "9";
-    events[1].endTime = "10";
-    events[1].description = "derf was here kill me knoweoiaf;wejfa;wigj;aer j iogaerjgoi";
-    events[2] = new Object;
-    events[2].name = "Fred";
-    events[2].location = "here";
-    events[2].startTime = "9";
-    events[2].endTime = "10";
-    events[2].description = "derf was here kill me knoweoiaf;wejfa;wigj;aer j iogaerjgoi";
-    
-    for( var i = 0; i < events.length; i++){
-        $(".sidebar-nav #" + i).after("<li id='" + (i+1) + "'> <a href='#'>" + events[i].name + " <span class='glyphicon arrow'></span></a>"
-            + "<ul><li><a href='#'>" + events[i].location + "</a></li><li><a href='#'>" + events[i].startTime 
-            + "</a></li><li><a href='#'>" + events[i].endTime + "</a></li><li id='p" + i + "'><a href='#'>"
-            + events[i].description + "</a></li></ul></li>");
-        $("#events-hidden .dropdown-menu #t" + i).after("<li id='t" + (i+1) + "'> <a href='#'>" + events[i].name + " </a>"
-            + "<ul><li><a href='#'>" + events[i].location + "</a></li><li><a href='#'>" + events[i].startTime 
-            + "</a></li><li><a href='#'>" + events[i].endTime + "</a></li><li><a href='#'>"
-            + events[i].description + "</a></li></ul></li>");
-    }
+	
+	test(43.4689, -80.5400, function(arr){
+		events = arr;
+		
+		for(var i = 0; i < events.length; i++){
+			var li_id = "<li id = '" + (i+1) + "'>";
+			var a_id = "<a id = 'eve" + (i+1) + "'>";
+			
+			$("#event-details #" + i).after(li_id+a_id+events[i].name+"</a></li>");
+			var modify = document.getElementById("eve" + (i+1) + "");
+			modify.href = events[i].event_url;
+		}
+	});
 }
+
+function test(lat, lon, back_fn){
+ 
+var query = "https://api.meetup.com/2/open_events?callback=?&lat="+lat+"&lon="+lon+"&order=distance&page=7&radius=10&key="+APIKEY;
+
+var results = [];
+
+$.getJSON(query, function (data) {
+  $.each(data.results, function (i, item) {
+   results [i] = item; 
+  });
+  back_fn(results);
+    }); 
+}
+
+
+
 
 function placeMarker(place) {
   var marker = new google.maps.Marker({
