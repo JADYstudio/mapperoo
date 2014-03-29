@@ -52,7 +52,6 @@ body {
 	font-size: 15px;
 	font-weight: 300;
 	z-index: 10;
-	margin-bottom: 0;
 }
 
 #search-bar:focus {
@@ -106,6 +105,11 @@ body {
     padding-left: 10px;
     padding-right: 10px;
     width: 350px;
+}
+
+#no-bot-pls{
+	padding-bottom: 0;
+	margin-bottom: 0;
 }
 
 .btn-default {
