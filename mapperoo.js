@@ -67,8 +67,10 @@ function initialize() {
 		geolocate_on = true;
 		navigator.geolocation.getCurrentPosition(function(position) {
 		initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-		
 		map.setCenter(initialLocation);
+		
+		getToPlace();
+		
 		}, function() {
 		handleNoGeolocation(geolocate_on);
 		});
