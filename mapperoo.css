@@ -24,10 +24,6 @@ body {
 	float: left;
 	z-index: 1;
 }
-.controls {
-	margin-bottom: 0;
-	padding-bottom: 0;
-}
 
 #right-menu {
 	height: 85%;
