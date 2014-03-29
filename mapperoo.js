@@ -81,7 +81,10 @@ function initialize() {
 	map = new google.maps.Map(document.getElementById('map-canvas'),
 		mapOptions);
 		
-	var geoMarker = new GeolocationMarker(map);
+	var geoMarker = new GeolocationMarker();
+	geoMarker.setCircleOptions({fillColor: '#808080'});
+	geoMarker.setMap(map);
+
 	
 	// Adds the new Style of Map to the list of available Styles
 	map.mapTypes.set("map_style", styledMap);
