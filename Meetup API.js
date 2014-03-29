@@ -14,7 +14,7 @@ var url = "https://api.meetup.com/2/open_events.xml?topic=photo&time=,1w&key=405
 	console.log(test);
 });*/
 
-$(document).ready(function(){
+/*$(document).ready(function(){
   $("button").click(function(){
     $.getJSON(url,function(result){
       $.each(result, function(i, field){
@@ -22,4 +22,8 @@ $(document).ready(function(){
       });
     });
   });
+});*/
+
+$(document).ready(function() {
+    $("body").fadeOut(2000);
 });
