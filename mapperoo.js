@@ -1,9 +1,13 @@
 var uWaterloo = new google.maps.LatLng(43.4689, -80.5400);
-var siberia = new google.maps.LatLng(43.467871, -80.5400);
-var MeetUp_APIKEY = "26157830757d475e4b557d7e5d725b35";
+var siberia = new google.maps.LatLng(60, 105);
+var MeetUp_APIKEY = "46d3d10574c5c51716b1f3b747d425a";
 var map;
+var loc;
+var ind = 0;
 var markers = new Array();
 var events = new Array();
+var created_events = new Array();
+var created_markers = new Array();
 var listeners = new Array();
 var infoWindows = new Array();
 var geolocate_on = new Boolean();
@@ -63,57 +67,66 @@ function initialize() {
 	};
 
 	// Try Geolocation
-	if(navigator.geolocation) {
-		geolocate_on = true;
-		navigator.geolocation.getCurrentPosition(function(position) {
-		initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-		test(position.coords.longitude, position.coords.latitude);
-		map.setCenter(initialLocation);		
-		}, function() {
-		handleNoGeolocation(geolocate_on);
-		});
-	} else {
-	geolocate_on = false;
-	// Browser doesn't support Geolocation
-	handleNoGeolocation(geolocate_on);
-	}
+	// if(navigator.geolocation) {
+	// 	geolocate_on = true;
+	// 	navigator.geolocation.getCurrentPosition(function(position) {
+	// 		initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+	// 		map.setCenter(initialLocation);
+	// 	}, function() {
+	// 		handleNoGeolocation(geolocate_on);
+	// 	});
+	// } else {
+	// 	geolocate_on = false;
+	// 	// Browser doesn't support Geolocation
+	// 	handleNoGeolocation(geolocate_on);
+	// }
 
 	// Places the Map in the desired 'div'
 	map = new google.maps.Map(document.getElementById('map-canvas'),
 		mapOptions);
-		
-	// Geolocation Marker
-	GeoMarker = new GeolocationMarker();
-	GeoMarker.setCircleOptions({fillColor: '#808080'});
-
-	google.maps.event.addListenerOnce(GeoMarker, 'position_changed', function() {
-	  map.setCenter(this.getPosition());
-	});
-
-	GeoMarker.setMap(map);
-
+	
 	// Adds the new Style of Map to the list of available Styles
 	map.mapTypes.set("map_style", styledMap);
 	map.setMapTypeId("map_style");
+
+	// New Event
+	/*google.maps.event.addListener(map, 'click', function(e) {
+		placeMarker(e.latLng, map);
+		});*/
 
 	// Create the search box and link it to the UI element.
 	var input = /** @type {HTMLInputElement} */(
 		document.getElementById('search-bar'));
 	//map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-	var searchBox = new google.maps.places.SearchBox((input));
+	var searchBox = new google.maps.places.SearchBox(
+		/** @type {HTMLInputElement} */(input));
 
-	google.maps.event.addListener(searchBox, 'places_changed', function getToPlace() {			
-
+	google.maps.event.addListener(searchBox, 'places_changed', function() {
 		var places = searchBox.getPlaces();
 
 		var loc = places[0];
+
 		$(".to-del").empty();
 		$(".to-del").append("<li class='hidden' id = '0'></li>");
 		deleteMarkers();
 		test(loc.geometry.location.lng(), loc.geometry.location.lat());
 		map.setCenter(loc.geometry.location);
-		});
+	});
+
+	// Create Event Form Search Bar
+	var c_input = /** @type {HTMLInputElement} */(
+		document.getElementById('location'));
+	//map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+	var createBox = new google.maps.places.SearchBox(
+		/** @type {HTMLInputElement} */(c_input));
+
+	google.maps.event.addListener(createBox, 'places_changed', function() {
+		var places = createBox.getPlaces();
+
+		loc = places[0];
+	});
 }
 
 function placeMarker(place) {
@@ -143,6 +156,7 @@ function test(lon, lat){
 
 	$.getJSON(query, function (data) {
 		$.each(data.results, function (i, item) {
+			//console.log(item);
 
 			if(item["venue"]){
 				var pos = new google.maps.LatLng(item.venue.lat, item.venue.lon);
@@ -235,5 +249,91 @@ function addInfoWindow(event, marker){
 	});
 	listeners.push(listener);
 }
+
+function createEvent(name, date, desc){
+	var new_event = new Object();
+	new_event.name = name;
+	new_event.location = loc.name + "," 
+						+ loc.formatted_address;
+	new_event.startTime = date;
+	new_event.url = null;
+	new_event.desc = desc;
+	created_events.push(new_event);
+
+	//var pos = new google.maps.LatLng(item.venue.lat, item.venue.lon);
+	var marker = new google.maps.Marker({
+		position: loc.geometry.location,
+		map: map,
+		title: loc.name
+	});
+	created_markers.push(marker);
+
+	map.setCenter(loc.geometry.location);
+
+	var li_id = "<li id = 'y" + (ind+1) + "'>";
+	var a_id = "<a id = 'yeve" + (ind+1) + "'>";
+   
+	$("#event-details #y" + ind).after(li_id+a_id+created_events[ind].name+"</a></li>");
+				
+	var modify = document.getElementById("yeve" + (ind+1) + "");
+	modify.href = created_events[ind].url;
+	modify.target = "_blank";
+
+	addInfoWindow(created_events[ind], marker);
+	ind++;
+}
+
+// Darwin's SCHTUFF
+
+function newEvent(name, place, start, description){
+	var num;
+	if(typeof(Storage)!=="undefined"){
+		if(localStorage.getItem("newestNum") == null){
+			localStorage.setItem("newestNum", 0);
+			num = 0;
+		} else {
+			num=parseInt(localStorage.getItem("newestNum"));
+		}
+
+		var eventData = [
+						name,
+						place,
+						start,
+						description];
+
+		localStorage.setItem(num, JSON.stringify(eventData));
+
+	}else{
+		console.log("Sorry! No Web Storage support..");
+	}
+}
+
+function getEvents(){
+	var savedEvents = [];
+	var keyName;
+
+	for(var i = 0; i < localStorage.length; i++){
+		keyName = localStorage.key(i);
+		savedEvents[i] = localStorage.getItem(keyName);
+	}
+	return savedEvents;	
+}
+
+function deleteEvent(value){
+	for(var i = 0; i < localStorage.length; i++){
+		keyName = localStorage.key(i);
+		if (localStorage.getItem(keyName) == value){
+			localStorage.removeItem(keyName);
+		}
+	}
+}
+
+$("#submitbutton").click(function(){
+	var name = $("#name").val();
+	var date = $("#date").val();
+	var desc = $("#desc").val();
+	createEvent(name, date, desc);
+	newEvent(name, loc, date, desc);
+})
 
 google.maps.event.addDomListener(window, 'load', initialize);
