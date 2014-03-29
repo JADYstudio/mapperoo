@@ -1,6 +1,6 @@
 var uWaterloo = new google.maps.LatLng(43.4689, -80.5400);
 var siberia = new google.maps.LatLng(60, 105);
-var MeetUp_APIKEY = "26157830757d475e4b557d7e5d725b35";
+var MeetUp_APIKEY = "46d3d10574c5c51716b1f3b747d425a";
 var map;
 var markers = new Array();
 var events = new Array();
@@ -63,58 +63,42 @@ function initialize() {
 	};
 
 	// Try Geolocation
-	if(navigator.geolocation) {
-		geolocate_on = true;
-		navigator.geolocation.getCurrentPosition(function(position) {
-			initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-			map.setCenter(initialLocation);
-			
-		}, function() {
-			handleNoGeolocation(geolocate_on);
-		});
-	} else {
-		geolocate_on = false;
-		// Browser doesn't support Geolocation
-		handleNoGeolocation(geolocate_on);
-	}
+	// if(navigator.geolocation) {
+	// 	geolocate_on = true;
+	// 	navigator.geolocation.getCurrentPosition(function(position) {
+	// 		initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+	// 		map.setCenter(initialLocation);
+	// 	}, function() {
+	// 		handleNoGeolocation(geolocate_on);
+	// 	});
+	// } else {
+	// 	geolocate_on = false;
+	// 	// Browser doesn't support Geolocation
+	// 	handleNoGeolocation(geolocate_on);
+	// }
 
 	// Places the Map in the desired 'div'
 	map = new google.maps.Map(document.getElementById('map-canvas'),
 		mapOptions);
-		
-	var geoMarker = new GeolocationMarker();
-    geoMarker.setCircleOptions({fillColor: '#808080'});
-
-    google.maps.event.addListenerOnce(geoMarker, 'position_changed', function() {
-    	map.setCenter(this.getPosition());
-    });
-
-	google.maps.event.addListener(geoMarker, 'geolocation_error', function(e) {
-	  alert('There was an error obtaining your position. Message: ' + e.message);
-	});
-
-	geoMarker.setMap(map);
-
-
 	
 	// Adds the new Style of Map to the list of available Styles
 	map.mapTypes.set("map_style", styledMap);
 	map.setMapTypeId("map_style");
 
 	// New Event
-	google.maps.event.addListener(map, 'click', function(e) {
+	/*google.maps.event.addListener(map, 'click', function(e) {
 		placeMarker(e.latLng, map);
-		});
+		});*/
 
 	// Create the search box and link it to the UI element.
 	var input = /** @type {HTMLInputElement} */(
-		document.getElementById("search-bar"));
+		document.getElementById('search-bar'));
 	//map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
 	var searchBox = new google.maps.places.SearchBox(
 		/** @type {HTMLInputElement} */(input));
 
-		google.maps.event.addListener(searchBox, "places_changed", function() 	{
+	google.maps.event.addListener(searchBox, 'places_changed', function() {
 		var places = searchBox.getPlaces();
 
 		var loc = places[0];
@@ -158,7 +142,7 @@ function test(lon, lat){
 		$.each(data.results, function (i, item) {
 			//console.log(item);
 
-			if(item.hasOwnProperty("venue")){
+			if(item["venue"]){
 				var pos = new google.maps.LatLng(item.venue.lat, item.venue.lon);
 				var marker = new google.maps.Marker({
 					position: pos,
