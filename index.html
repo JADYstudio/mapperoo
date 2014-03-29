@@ -8,22 +8,14 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="mapperoo.css" rel="stylesheet">
+    <link href="maperoo.css" rel="stylesheet">
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
-    <script src="https://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/src/geolocationmarker-compiled.js"></script>
     <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdH1tc30kU7krasCvtA9tlqt2TFfd2khA&sensor=true">
     </script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.js"></script>
-    <script src="css/bootstrap.theme.js"></script>
-    <script src="jquery.metisMenu.js"></script>
-    <script src="mapperoo.js"></script>
-    
     <script>
         $(document).ready(function(){
             if ($(window).width() > 767) $("#events-hidden").addClass("hidden");
@@ -37,6 +29,7 @@
   </head>
 
   <body role="document" class="fill">
+
     <!-- Fixed navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
@@ -75,10 +68,9 @@
                 <form role="form">
                    <div class="form-group">
                       <label for="name">Location</label>
-                      <input id="search-bar" class="controls" type="text" placeholder="Search Bar" autocomplete="on">
+                      <input id="search-bar" class="controls" type="text" placeholder="Search Bar">
                    </div>
-                	
-                <button type="submit" class="btn btn-default">Submit</button>
+                   <button type="submit" class="btn btn-default">Submit</button>
                 </form>
               </ul>
             </li>
@@ -159,6 +151,13 @@
         </div>
 
     </div>
+    <script id="popover0"></script>
 
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.js"></script>
+    <script src="css/bootstrap.theme.js"></script>
+    <script src="jquery.metisMenu.js"></script>
+    <script src="maperoo.js"></script>
   </body>
 </html>
