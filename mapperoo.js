@@ -82,8 +82,19 @@ function initialize() {
 		mapOptions);
 		
 	var geoMarker = new GeolocationMarker();
-	geoMarker.setCircleOptions({fillColor: '#808080'});
+    geoMarker.setCircleOptions({fillColor: '#808080'});
+
+    google.maps.event.addListenerOnce(geoMarker, 'position_changed', function() {
+    	map.setCenter(this.getPosition());
+    	map.fitBounds(this.getBounds());
+    });
+
+	google.maps.event.addListener(geoMarker, 'geolocation_error', function(e) {
+	  alert('There was an error obtaining your position. Message: ' + e.message);
+	});
+
 	geoMarker.setMap(map);
+
 
 	
 	// Adds the new Style of Map to the list of available Styles
