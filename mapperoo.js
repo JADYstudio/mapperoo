@@ -171,6 +171,7 @@ function test(lon, lat){
 				
 				var modify = document.getElementById("eve" + (ind+1) + "");
 				modify.href = events[ind].url;
+				modify.target = "_blank";
 
 				addInfoWindow(events[ind], marker);
 				ind++;
