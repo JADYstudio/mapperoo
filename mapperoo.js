@@ -202,6 +202,8 @@ function showMarkers() {
 function deleteMarkers() {
 	clearMarkers();
 	markers = [];
+	$("#event-details").empty();
+	$("#event-details").append("<li class='hidden' id = '0'></li>");
 }
 
 function deleteInfoWindows(){
