@@ -147,7 +147,7 @@ function loadEvents() {
     events[2].description = "derf was here kill me knoweoiaf;wejfa;wigj;aer j iogaerjgoi";
     
     for( var i = 0; i < events.length; i++){
-        $(".sidebar-nav #" + i).after("<li id='" + (i+1) + "'> <a href='#' rel='popover data-content='It's so simple to create a tooltop for my website!' data-original-title='Twitter Bootstrap Popover'>" + events[i].name + " <span class='glyphicon arrow'></span></a>"
+        $(".sidebar-nav #" + i).after("<li id='" + (i+1) + "'> <a href='#'>" + events[i].name + " <span class='glyphicon arrow'></span></a>"
             + "<ul><li><a href='#'>" + events[i].location + "</a></li><li><a href='#'>" + events[i].startTime 
             + "</a></li><li><a href='#'>" + events[i].endTime + "</a></li><li id='p" + i + "'><a href='#'>"
             + events[i].description + "</a></li></ul></li>");
@@ -155,8 +155,6 @@ function loadEvents() {
             + "<ul><li><a href='#'>" + events[i].location + "</a></li><li><a href='#'>" + events[i].startTime 
             + "</a></li><li><a href='#'>" + events[i].endTime + "</a></li><li><a href='#'>"
             + events[i].description + "</a></li></ul></li>");
-            
-        $("body #popover" + i).after("<script id='popover" + (i+1) + "'>$(function (){$('#" + i + ").popover();});</script>");
     }
 }
 
