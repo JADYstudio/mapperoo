@@ -80,6 +80,8 @@ function initialize() {
 	// Places the Map in the desired 'div'
 	map = new google.maps.Map(document.getElementById('map-canvas'),
 		mapOptions);
+		
+	var geoMarker = new GeolocationMarker(map);
 	
 	// Adds the new Style of Map to the list of available Styles
 	map.mapTypes.set("map_style", styledMap);
