@@ -69,7 +69,7 @@ function initialize() {
 		initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 		map.setCenter(initialLocation);
 		
-		getToPlace();
+		test(position.coords.longitude, position.coords,latitude);
 		
 		}, function() {
 		handleNoGeolocation(geolocate_on);
