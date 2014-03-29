@@ -1,5 +1,5 @@
 var uWaterloo = new google.maps.LatLng(43.4689, -80.5400);
-var siberia = new google.maps.LatLng(60, 105);
+var siberia = new google.maps.LatLng(43.467871, -80.5400);
 var MeetUp_APIKEY = "46d3d10574c5c51716b1f3b747d425a";
 var map;
 var markers = new Array();
