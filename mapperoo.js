@@ -64,13 +64,13 @@ function initialize() {
 
 	// Try Geolocation
 	if(navigator.geolocation) {
-	geolocate_on = true;
-	navigator.geolocation.getCurrentPosition(function(position) {
+		geolocate_on = true;
+		navigator.geolocation.getCurrentPosition(function(position) {
 		initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 		map.setCenter(initialLocation);
-	}, function() {
+		}, function() {
 		handleNoGeolocation(geolocate_on);
-	});
+		});
 	} else {
 	geolocate_on = false;
 	// Browser doesn't support Geolocation
@@ -80,6 +80,17 @@ function initialize() {
 	// Places the Map in the desired 'div'
 	map = new google.maps.Map(document.getElementById('map-canvas'),
 		mapOptions);
+		
+	// Geolocation Marker
+	GeoMarker = new GeolocationMarker();
+	GeoMarker.setCircleOptions({fillColor: '#808080'});
+
+	google.maps.event.addListenerOnce(GeoMarker, 'position_changed', function() {
+	  map.setCenter(this.getPosition());
+	});
+
+	GeoMarker.setMap(map);
+
 	
 	// Adds the new Style of Map to the list of available Styles
 	map.mapTypes.set("map_style", styledMap);
