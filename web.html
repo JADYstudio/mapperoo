@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" class="fill">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mapperoo</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdH1tc30kU7krasCvtA9tlqt2TFfd2khA&sensor=true">
+    </script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            if ($(window).width() > 767) $("#events-hidden").addClass("hidden");
+                else $("#events-hidden").removeClass("hidden");
+            if ($(window).width() > 767) $("#events-hidden2").addClass("hidden");
+                else $("#events-hidden2").removeClass("hidden");
+            loadEvents();
+        });
+    </script>
+  
+  </head>
+
+  <body role="document" class="fill">
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <!-- Button for mobile size -->
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          
+          <a class="navbar-brand" href="#">Mapperoo</a>
+        </div>
+        
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#">Home</a></li>
+            
+            <!-- Filter Options dropdown -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Filter Options <b class="caret"></b></a>
+              <ul class="dropdown-menu dropdown-menu-form">
+                <li class="dropdown-header">Style</li>
+                    <li><label class="checkbox"><input type="checkbox">Red</label></li>
+                    <li class="divider"></li>
+                <li class="dropdown-header">Elements</li>
+                    <li><label class="checkbox"><input type="checkbox">Stuff</label></li>
+              </ul>
+            </li>
+            
+            <!-- Search dropdown -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search <b class="caret"></b></a>
+              <ul class="dropdown-menu dropdown-menu-form">
+                <form role="form">
+                   <div class="form-group">
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control" id="name" 
+                         placeholder="Enter Name">
+                   </div>
+                   <div class="form-group">
+                      <label for="inputfile">File input</label>
+                      <input type="file" id="inputfile">
+                      <p class="help-block">Example block-level help text here.</p>
+                   </div>
+                   <div class="checkbox">
+                      <label>
+                      <input type="checkbox"> Check me out
+                      </label>
+                   </div>
+                   <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+              </ul>
+            </li>
+            
+            <!-- Events Dropdown (appears if screen not wide enough) -->
+            
+            <li class="dropdown hidden" id="events-hidden">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li id="t0"></li>
+                <!-- Where events are appended -->
+              </ul>
+            </li>
+            
+            <li class="dropdown hidden" id="events-hidden2">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Create Event <b class="caret"></b></a>
+              <ul class="dropdown-menu dropdown-menu-form">
+                <form role="form">
+                   <div class="form-group">
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control" id="name" 
+                         placeholder="Enter Name">
+                   </div>
+                   <div class="form-group">
+                      <label for="inputfile">File input</label>
+                      <input type="file" id="inputfile">
+                      <p class="help-block">Example block-level help text here.</p>
+                   </div>
+                   <div class="checkbox">
+                      <label>
+                      <input type="checkbox"> Check me out
+                      </label>
+                   </div>
+                   <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+              </ul>
+         
+            </li>
+            
+            <!-- /Events Dropdown -->
+            
+          </ul>
+        </div><!--/.nav-collapse -->
+        
+        
+        
+      </div>
+    </div>
+
+    <!-- Sidebar List -->
+    <div id="wrapper">
+        
+        
+        
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav" id="menu">
+                
+                <li id="event" class="active"> <a href="#">Events <span class="glyphicon arrow"></span></a>
+                <ul id="event-details">
+                
+                <li class="hidden" id = "0"></li>
+                
+
+                
+                </ul>
+                </li>
+                
+                <!-- Create event form -->
+                <li id="event"> <a href="#">Create Event <span class="glyphicon arrow"></span></a>
+                <ul id="event-details">
+                <form role="form">
+                   <div class="form-group" id="create-event">
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control" id="name" 
+                         placeholder="Enter Name">
+                   </div>
+                   <div class="form-group" id="create-event">
+                      <label for="inputfile">File input</label>
+                      <input type="file" id="inputfile">
+                      <p class="help-block">Example block-level help text here.</p>
+                   </div>
+                   <div class="checkbox">
+                      <label>
+                      <input type="checkbox"> Check me out
+                      </label>
+                   </div>
+                   <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                </ul>
+                </li>
+        </div>
+
+        <!-- Map Display -->
+        <div id="page-content-wrapper" class="fill">
+            <!-- Keep all page content within the page-content inset div! -->
+            <div id="map-canvas" class="page-content inset fill">
+                <p>Derp</p>
+            </div>
+        </div>
+
+    </div>
+    <script id="popover0"></script>
+
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.js"></script>
+    <script src="css/bootstrap.theme.js"></script>
+    <script src="jquery.metisMenu.js"></script>
+    <script src="mapperoo.js"></script>
+  </body>
+</html>
