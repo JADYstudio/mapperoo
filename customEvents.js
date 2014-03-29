@@ -1,6 +1,4 @@
-// JavaScript Document
-
-function newEvent(name, lon, lat, start, description, id){
+function newEvent(name, lon, lat, start, description){
 	var num;
 	if(typeof(Storage)!=="undefined"){
 	  if(localStorage.getItem("newestNum") == null){
@@ -15,8 +13,7 @@ function newEvent(name, lon, lat, start, description, id){
 	  lon, 
 	  lat, 
 	  start, 
-	  description,
-	  id];
+	  description];
 	  
 	localStorage.setItem(num, JSON.stringify(eventData));
 	
