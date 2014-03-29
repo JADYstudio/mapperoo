@@ -219,7 +219,7 @@ function deleteListeners(){
 }
 
 function addInfoWindow(event, marker){
-	var contents = "<a href = \"" + event.url + "\">" + event.name + "</a>             " + 
+	var contents = "<a href = \"" + event.url + "\">" + event.name + "</a>  \n" + 
 					"Start Time: " + event.startTime.toString() +
 					"Location: " + event.location + 
 					"Description: " + event.desc;
