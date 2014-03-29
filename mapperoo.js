@@ -1,6 +1,7 @@
 var uWaterloo = new google.maps.LatLng(43.4689, -80.5400);
+var siberia = new google.maps.LatLng(60, 105);
 var map;
-var geolocate_on = false;
+var geolocate_on = new Boolean();
 
 function initialize() {
 
@@ -36,7 +37,8 @@ function initialize() {
 	// Affects the Map Options
 	var mapOptions = {
 		zoom: 15,
-		center: uWaterloo,
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		//center: uWaterloo,
 
 		disableDefaultUI: true,
 
@@ -57,16 +59,17 @@ function initialize() {
 
 	// Try Geolocation
 	if(navigator.geolocation) {
+		geolocate_on = true;
 		navigator.geolocation.getCurrentPosition(function(position) {
-			var pos = new google.maps.LatLng(position.coords.latitude,
-											position.coords.longitude);
-
-			map.setCenter(pos);
-    	}, 
-    	geolocate_on = true);
+			initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+			map.setCenter(initialLocation);
+		}, function() {
+			handleNoGeolocation(geolocate_on);
+		});
 	} else {
+		geolocate_on = false;
 		// Browser doesn't support Geolocation
-		map.setCenter(uWaterloo);
+		handleNoGeolocation(geolocate_on);
 	}
 
 	// Places the Map in the desired 'div'
@@ -103,15 +106,7 @@ function initialize() {
 		markers = [];
 
 		for (var i = 0, place; place = places[i]; i++) {
-			// Create a marker for each place.
-			/*var marker = new google.maps.Marker({
-			map: map,
-			title: place.name,
-			position: place.geometry.location
-			});*/
 			placeMarker(place);
-			//markers.push(marker);
-			//map.setCenter(place.geometry.location);
 		}
 	});
 
@@ -133,6 +128,16 @@ function placeMarker(place) {
   });
 
   map.setCenter(place.geometry.location);
+}
+
+function handleNoGeolocation(flag){
+	if(flag == true){
+		alert("Geolocation service failed.");
+		map.setCenter(siberia);
+	} else {
+		alert("Geolocation not available");
+		map.setCenter(siberia);
+	}
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
