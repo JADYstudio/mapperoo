@@ -1,17 +1,21 @@
 // JavaScript Document
+var APIKEY = "405727146c5e62374a697e641e27d";
 
-function jsonCall(){
+function test(lat, lon){
+	
+var query = "https://api.meetup.com/2/open_events?callback=?&lat="+lat+"&lon="+lon+"&radius=smart&key=405727146c5e62374a697e641e27d";
+//"https://www.api.meetup.com/2/open_events?callback=?&lon=" + long + "&lat=" + lat + "&radius=smart&key=" + APIKEY;
+ //https://api.meetup.com/2/open_events?callback=?&country=CA&city=Waterloo&page=5&key=405727146c5e62374a697e641e27d
 
-var meetupAPI = "http://api.meetup.com/groups.json/?zip=11211&topic=moms&order=members&key=405727146c5e62374a697e641e27d";
-$.getJSON("https://api.meetup.com/2/groups?&sign=true&member_id=8377069&page=20&api&key=405727146c5e62374a697e641e27d&only=name,link", 
-function (data) {
-    var htmlString = "";
-    $.each(data.items, function (i, item) {
-        htmlString += '<h3><a href="' + item.link + '" target="_blank">' + item.name + '</a></h3>';
-		console.log(data);
-    });
-	});
-
-
-
+	var results = [];
+	
+$.getJSON(query, function (data) {
+		$.each(data.results, function (i, item) {
+			
+			results [i] = item; 
+		});
+    });	
+	return results;
 }
+
+//"https://api.meetup.com/2/open_events?callback=?&country=CA&city=Waterloo&page=5&key=405727146c5e62374a697e641e27d"
