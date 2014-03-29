@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Meetup Groups by Member ID</title>
-    <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function(){
-    $.getJSON("https://api.meetup.com/2/open_events?callback=?&country=CA&city=Waterloo&page=5&key=405727146c5e62374a697e641e27d", 
-function (data) {
-	
-	console.log(data);
-    var htmlString = "";
-    $.each(data.results, function (i, item) {
-		
-        htmlString += '<h3><a href="' + item.link + '" target="_blank">' + item.name + '</a></h3>';
-    });
-    $('#groups').html(htmlString);});
-    });
-    </script>
-    </head>
+<title></title>
+<script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="meetup_getApi.js"></script>
+<script type="text/javascript">
 
-    <body>
-    <div id="groups"></div>
-    </body>
 
-    </html>
+$(document).ready(function(){
+	console.log(test(43.471484, -80.537646));
+	//test("-80.536161", "43.472371");
+});
+
+
+
+
+</script>
+</head>
+
+<body>
+<div id="groups"></div>
+</body>
+
+</html>
