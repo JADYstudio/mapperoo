@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="fill">
-  <head>
+    <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +11,7 @@
     <link href="mapperoo.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen"
      href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&sensor=true&key=AIzaSyAdH1tc30kU7krasCvtA9tlqt2TFfd2khA&sensor=true"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&sensor=true&key=AIzaSyAdH1tc30kU7krasCvtA9tlqt2TFfd2khA&sensor=true"></script>
     <script src="https://google-maps-utility-library-v3.googlecode.com/svn/trunk/geolocationmarker/src/geolocationmarker-compiled.js"></script>
 
     <!-- jQuery -->
@@ -24,156 +24,120 @@
                 else $("#events-hidden2").removeClass("hidden");
         });
     </script>
-  
-  </head>
+    </head>
 
-  <body role="document" class="fill">
+    <body role="document" class="fill">
 
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<!-- Fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
-        <div class="navbar-header">
+    <div class="navbar-header"> 
           <!-- Button for mobile size -->
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          
-          <a class="navbar-brand" href="#">Mapperoo</a>
-        </div>
-        
-        <div class="navbar-collapse collapse">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+          <a class="navbar-brand" href="#">Mapperoo</a> </div>
+    <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            
-            <!-- Search dropdown -->
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search <b class="caret"></b></a>
+        
+        <!-- Search dropdown -->
+        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search <b class="caret"></b></a>
               <ul class="dropdown-menu dropdown-menu-form">
-                <form role="form" onSubmit="getThePlace()">
-                   <div class="form-group" id="no-bot-pls">
-                      <label for="name">Location</label>
-                      <input id="search-bar" class="controls" type="text" placeholder="Search Bar">
-                   </div>
-                  <!-- <button class="btn btn-default">Submit</button> -->
+            <form role="form" onSubmit="getThePlace()">
+                  <div class="form-group" id="no-bot-pls">
+                <label for="name">Location</label>
+                <input id="search-bar" class="controls" type="text" placeholder="Search Bar">
+              </div>
                 </form>
-              </ul>
-            </li>
-            <li class = "dropdown"><a href="https://github.com/JADYstudio/mapperoo">About</a></li>
-            <!-- Events Dropdown (appears if screen not wide enough) -->
-            
-            <li class="dropdown hidden" id="events-hidden">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li id="t0"></li>
-                <!-- Where events are appended -->
-              </ul>
-            </li>
-            
-            <li class="dropdown hidden" id="events-hidden2">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Create Event <b class="caret"></b></a>
-              <ul class="dropdown-menu dropdown-menu-form">
-                <form role="form">
-                   <div class="form-group">
-                      <label for="name">Location</label>
-                      <input id="search-bar" class="controls" type="text" placeholder="Search Bar">
-                   </div>
-                   <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-              </ul>
-         
-            </li>
-            
-            <!-- /Events Dropdown -->
-            
           </ul>
+            </li>
+        <li class = "dropdown"><a href="https://github.com/JADYstudio/mapperoo">About</a></li>
+        <!-- Events Dropdown (appears if screen not wide enough) -->
+        
+        <li class="dropdown hidden" id="events-hidden"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+<!-- Where events are appended -->
+          </ul>
+            </li>
+        <li class="dropdown hidden" id="events-hidden2"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Create Event <b class="caret"></b></a>
+              <ul class="dropdown-menu dropdown-menu-form">
+            <form role="form">
+                  <div class="form-group">
+                <label for="name">Location</label>
+                <input id="search-bar" class="controls" type="text" placeholder="Search Bar">
+              </div>
+                  <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+          </ul>
+            </li>
+        
+        <!-- /Events Dropdown -->
+      </ul>
         </div>
-
-      </div>
+  </div>
     </div>
 
-    <!-- Sidebar List -->
-    <div id="wrapper">
-        
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav" id="menu">
-                
-                <li id="event" class="active"> <a href="#">Events <span class="glyphicon arrow"></span></a>
-                <ul id="event-details" class="to-del">
-                
-                <li class="hidden" id = "0"></li>
-                
+<!-- Sidebar List -->
+<div id="wrapper">
 
-                
-                </ul>
-                </li>
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+<ul class="sidebar-nav" id="menu">
+<li id="event" class="active"> <a href="#">Events <span class="glyphicon arrow"></span></a>
+      <ul id="event-details" class="to-del">
+    <li class="hidden" id = "0"></li>
+  </ul>
+    </li>
+<li id="event" class="active"> <a href="#"> Your Events <span class="glyphicon arrow"></span></a>
+      <ul id="event-details">
+    <li class="hidden" id = "y0"></li>
+  </ul>
+    </li>
 
-
-                <li id="event" class="active"> <a href="#"> Your Events <span class="glyphicon arrow"></span></a>
-                <ul id="event-details">
-                
-                <li class="hidden" id = "y0"></li>
-                
-
-                
-                </ul>
-                </li>
-                
-                <!-- Create event form -->
-                <li id="event"> <a href="#">Create Event <span class="glyphicon arrow"></span></a>
-                <ul id="event-details">
-                <form role="form">
-                   <div class="form-group" id="create-event">
-                      <input id="name" class="controls" type="text" placeholder="Event Name">
-                      <div class="well">
-                      <div id="datetimepicker1" class="input-append date">
-                        <input id="date" data-format="dd/MM/yyyy hh:mm:ss" type="text"></input>
-                        <span class="add-on">
-                          <span class="glyphicon glyphicon-time">
-                          <i id="time" data-time-icon="icon-time" data-date-icon="icon-calendar">
-                          </i></span>
-                        </span>
-                      </div>
-                    </div>
-                    <script type="text/javascript">
+<!-- Create event form -->
+<li id="event"> <a href="#">Create Event <span class="glyphicon arrow"></span></a>
+      <ul id="event-details">
+    <form role="form" onSubmit="">
+          <div class="form-group" id="create-event">
+        <input id="name" class="controls" type="text" placeholder="Event Name">
+        <div class="well">
+              <div id="datetimepicker1" class="input-append date">
+            <input id="date" data-format="dd/MM/yyyy hh:mm:ss" type="text">
+            </input>
+            <span class="add-on"> <span class="glyphicon glyphicon-time"> </span> </span> </div>
+            </div>
+        <script type="text/javascript">
                       $(function() {
                         $('#datetimepicker1').datetimepicker({
                           language: 'pt-BR'
                         });
                       });
                     </script>
-                      <input id="location" class="controls" type="text" placeholder="Location">
-                      <input id="desc" class="controls" type="text" placeholder="Description">
-                   </div>
-                   <button type="submit" class="btn btn-default" id="submitbutton">Submit</button>
-                </form>
-                </ul>
-                </li>
-        </div>
+        <input id="location" class="controls" type="text" placeholder="Location">
+        <input id="desc" class="controls" type="text" placeholder="Description">
+      </div>
+          <button type="submit" class="btn btn-default" id="submitbutton">Submit</button>
+        </form>
+  </ul>
+    </li>
+</div>
 
-        <!-- Map Display -->
-        <div id="page-content-wrapper" class="fill">
-            <!-- Keep all page content within the page-content inset div! -->
-            <div id="map-canvas" class="page-content inset fill">
-                <p>Derp</p>
-            </div>
-        </div>
-
+<!-- Map Display -->
+<div id="page-content-wrapper" class="fill"> 
+      <!-- Keep all page content within the page-content inset div! -->
+      <div id="map-canvas" class="page-content inset fill">
+    <p>Derp</p>
+  </div>
     </div>
-    <script id="popover0"></script>
-
-    <script type="text/javascript"
+</div>
+<script type="text/javascript"
      src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
-    </script>
-    <script type="text/javascript"
+    </script> 
+<script type="text/javascript"
      src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-EN.js">
-    </script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.js"></script>
-    <script src="css/bootstrap.theme.js"></script>
-    <script src="jquery.metisMenu.js"></script>
-    <script src="mapperoo.js"></script>
-  </body>
+    </script> 
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/bootstrap.js"></script> 
+<script src="css/bootstrap.theme.js"></script> 
+<script src="jquery.metisMenu.js"></script> 
+<script src="mapperoo.js"></script>
+</body>
 </html>

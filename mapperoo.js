@@ -82,7 +82,7 @@ function initialize() {
 	map = new google.maps.Map(document.getElementById('map-canvas'),
 		mapOptions);
 	
-		// Geolocation Marker
+	// Geolocation Marker
 	GeoMarker = new GeolocationMarker();
 	GeoMarker.setCircleOptions({fillColor: '#808080'});
 
@@ -91,24 +91,16 @@ function initialize() {
 	});
 
 	GeoMarker.setMap(map);
-
 	
 	// Adds the new Style of Map to the list of available Styles
 	map.mapTypes.set("map_style", styledMap);
 	map.setMapTypeId("map_style");
 
-	// New Event
-	/*google.maps.event.addListener(map, 'click', function(e) {
-		placeMarker(e.latLng, map);
-		});*/
-
 	// Create the search box and link it to the UI element.
 	var input = /** @type {HTMLInputElement} */(
 		document.getElementById('search-bar'));
-	//map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-	var searchBox = new google.maps.places.SearchBox(
-		/** @type {HTMLInputElement} */(input));
+	var searchBox = new google.maps.places.SearchBox((input));
 
 	google.maps.event.addListener(searchBox, 'places_changed', function getThePlace() {
 		var places = searchBox.getPlaces();
@@ -123,16 +115,12 @@ function initialize() {
 	});
 
 	// Create Event Form Search Bar
-	var c_input = /** @type {HTMLInputElement} */(
-		document.getElementById('location'));
-	//map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+	var c_input =(document.getElementById('location'));
 
-	var createBox = new google.maps.places.SearchBox(
-		/** @type {HTMLInputElement} */(c_input));
+	var createBox = new google.maps.places.SearchBox((c_input));
 
 	google.maps.event.addListener(createBox, 'places_changed', function() {
 		var places = createBox.getPlaces();
-
 		loc = places[0];
 	});
 }
@@ -164,8 +152,6 @@ function test(lon, lat){
 
 	$.getJSON(query, function (data) {
 		$.each(data.results, function (i, item) {
-			//console.log(item);
-
 			if(item["venue"]){
 				var pos = new google.maps.LatLng(item.venue.lat, item.venue.lon);
 				var marker = new google.maps.Marker({
@@ -268,7 +254,6 @@ function createEvent(name, date, desc){
 	new_event.desc = desc;
 	created_events.push(new_event);
 
-	//var pos = new google.maps.LatLng(item.venue.lat, item.venue.lon);
 	var marker = new google.maps.Marker({
 		position: loc.geometry.location,
 		map: map,
@@ -290,8 +275,6 @@ function createEvent(name, date, desc){
 	addInfoWindow(created_events[ind], marker);
 	ind++;
 }
-
-// Darwin's SCHTUFF
 
 function newEvent(name, place, start, description){
 	var num;
